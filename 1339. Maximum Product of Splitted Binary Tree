@@ -1,0 +1,21 @@
+Question : - 
+https://leetcode.com/problems/maximum-product-of-splitted-binary-tree/description/
+
+solution : - 
+class Solution {
+
+    long sum =0, ans = 0;
+    public int maxProduct(TreeNode root) {
+        sum = totalSum(root);
+        totalSum(root);
+
+        return (int)(ans%1000000007);
+    }
+
+    public int totalSum(TreeNode root){
+        if(root==null)return 0;
+        int currSum = totalSum(root.left)+totalSum(root.right)+root.val;
+        ans = Math.max(ans,(sum - currSum)*currSum);
+        return currSum;
+    }
+}
