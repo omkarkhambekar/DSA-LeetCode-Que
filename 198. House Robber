@@ -1,0 +1,18 @@
+https://leetcode.com/problems/house-robber/description/
+
+class Solution {
+    public int rob(int[] nums) {
+        int n = nums.length;
+        int[]Dp = new int[n+1]; // create DP array for memoiozattion the previous max values
+
+        if(n==0){
+            return 0; //if length is 0 then answer is 0;
+        }   
+        Dp[0] = 0;  //base condition 
+        Dp[1] = nums[0]; //base condition 
+        for(int i=1; i<n; i++){            //iterate through given array for finding max values
+            Dp[i+1] = Math.max(Dp[i],Dp[i-1] + nums[i]);
+        }
+        return Dp[n]; 
+    }
+}
