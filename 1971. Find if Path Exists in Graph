@@ -1,0 +1,45 @@
+https://leetcode.com/problems/find-if-path-exists-in-graph/description/
+
+
+class Solution {
+    public boolean validPath(int n, int[][] edges, int source, int destination) {
+        ArrayList<Integer>[]g = BuildAdjList(edges,n);
+        boolean[] visited = new boolean[n+1];
+        Queue<Integer> q = new LinkedList<>();
+        q.add(source);
+        visited[source] = true;
+
+        while(!q.isEmpty()){
+            int curr = q.peek();
+            q.remove();
+            if(curr==destination){
+                return true;
+            }
+            for(int i=0; i<g[curr].size(); i++){
+                int v = g[curr].get(i);
+                if(visited[v]==false){
+                    q.add(v);
+                    visited[v] = true;
+                }
+            }
+        }
+        return visited[destination];
+    }
+
+    public ArrayList<Integer>[]BuildAdjList(int[][] A, int B){
+        ArrayList<Integer>[]g = new ArrayList[B+1];
+
+        for(int i=0; i<=B; i++){
+            g[i] = new ArrayList<Integer>();
+        }
+        for(int[] edge: A){
+            int a = edge[0];
+            int b = edge[1];
+            g[a].add(b);
+            g[b].add(a);
+        }
+        return g;
+    }
+
+    
+}
