@@ -1,0 +1,23 @@
+https://leetcode.com/problems/all-paths-from-source-to-target/description/
+
+class Solution {
+    public List<List<Integer>> allPathsSourceTarget(int[][] graph) {
+        List<List<Integer>> ans = new LinkedList<>();
+        List<Integer> curr = new ArrayList<>();
+        curr.add(0);
+        DFS(graph,0, graph.length-1,curr,ans);
+        return ans;
+    }
+
+    private void DFS(int[][] graph, int src, int dest, List<Integer> curr, List<List<Integer>> ans){
+        if(src == dest){
+            ans.add(new ArrayList<Integer>(curr));
+            return;
+        }
+        for(int node : graph[src]){
+            curr.add(node);
+            DFS(graph,node,dest,curr,ans);
+            curr.remove(curr.size()-1);
+        }
+    }
+}
