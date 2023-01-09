@@ -1,0 +1,64 @@
+Given the root of a binary tree, return the preorder traversal of its nodes' values.
+Example 1:
+Input: root = [1,null,2,3]
+Output: [1,2,3]
+Example 2:
+
+Input: root = []
+Output: []
+Example 3:
+
+Input: root = [1]
+Output: [1]
+
+Constraints:
+
+The number of nodes in the tree is in the range [0, 100].
+-100 <= Node.val <= 100
+Follow up: Recursive solution is trivial, could you do it iteratively?
+
+Solution both using stack and recursion TC O(n) Sc O(n) 
+PreOrder Traversal = Root, Left, Right
+
+class Solution {
+    public List<Integer> preorderTraversal(TreeNode root) {
+
+// using stack
+        
+        Stack<TreeNode> st = new Stack<>();
+        ArrayList<Integer> list = new ArrayList<>();
+
+        while(!st.isEmpty() || root!=null){
+            if(root == null){
+                root = st.pop();
+            }
+            else{
+                if(root.right!=null){
+                    st.push(root.right);
+                }
+                list.add(root.val);
+                root = root.left;
+            }
+        }
+        return list;
+
+
+
+
+// using recursion
+
+        ArrayList<Integer> list = new ArrayList<>();
+
+        preOrder(root,list);
+        return list;
+    }
+
+    public void preOrder(TreeNode temp, ArrayList<Integer> list){
+        if(temp==null){
+            return;
+        }
+        list.add(temp.val);
+        preOrder(temp.left,list);
+        preOrder(temp.right,list);
+    } 
+}
