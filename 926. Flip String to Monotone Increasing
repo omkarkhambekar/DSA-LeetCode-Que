@@ -1,0 +1,21 @@
+//https://leetcode.com/problems/flip-string-to-monotone-increasing/description/
+
+// Solution TC O(n) SC O(n)
+
+class Solution {
+    public int minFlipsMonoIncr(String s) {
+        int n = s.length();
+        int countTheOne = 0;
+        int minFlips = 0;
+
+        for(int i=0; i<n; i++){
+            if(s.charAt(i) == '1'){
+                countTheOne++;
+            }
+            else{
+                minFlips =Math.min(minFlips+1, countTheOne);
+            }
+        }
+        return minFlips;
+    }
+}
